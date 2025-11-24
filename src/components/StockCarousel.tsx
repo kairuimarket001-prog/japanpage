@@ -12,9 +12,22 @@ const formatStockDate = (dateString: string): string => {
 
     let date: Date;
 
-    if (dateString.includes('-')) {
-      date = new Date(dateString);
-    } else if (dateString.includes('/')) {
+    if (dateString.includes('/')) {
+      const parts = dateString.split('/');
+      if (parts.length === 3) {
+        let year = parseInt(parts[0]);
+        const month = parseInt(parts[1]);
+        const day = parseInt(parts[2]);
+
+        if (year < 100) {
+          year += 2000;
+        }
+
+        date = new Date(year, month - 1, day);
+      } else {
+        date = new Date(dateString);
+      }
+    } else if (dateString.includes('-')) {
       date = new Date(dateString);
     } else if (!isNaN(Number(dateString))) {
       date = new Date(Number(dateString));
