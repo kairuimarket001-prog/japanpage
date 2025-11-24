@@ -18,11 +18,11 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
 
   const generateWavePath = (offset: number) => {
     const points = 50;
-    let path = `M ${offset - 100},50 `;
+    let path = `M ${offset - 100},100 `;
 
     for (let i = 0; i <= points; i++) {
       const x = (i / points) * 200 + offset - 100;
-      const y = 35 + Math.sin(i * 0.3) * 8;
+      const y = 60 + Math.sin(i * 0.4) * 15;
       path += `L ${x},${y} `;
     }
 
@@ -34,13 +34,13 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
 
   return (
     <div className="px-4 py-3 relative overflow-hidden">
-      <div className="absolute inset-0 px-4 py-3">
-        <div className="max-w-lg mx-auto h-full rounded-2xl overflow-hidden">
+      <div className="absolute inset-0 px-4 py-3 z-0">
+        <div className="max-w-lg mx-auto h-full rounded-2xl overflow-hidden bg-green-50">
           <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
             <defs>
               <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#4ade80" stopOpacity="1" />
-                <stop offset="100%" stopColor="#86efac" stopOpacity="0.3" />
+                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#86efac" stopOpacity="0.5" />
               </linearGradient>
             </defs>
             <path
@@ -50,13 +50,13 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
             <path
               d={generateWavePath(animationOffset + 100)}
               fill="url(#waveGradient)"
-              opacity="0.5"
+              opacity="0.6"
             />
           </svg>
         </div>
       </div>
 
-      <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card p-5 relative">
+      <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card p-5 relative z-10">
 
         <div className="relative z-10">
           <div className="mb-4">
