@@ -27,7 +27,7 @@ export default function CompanyNature() {
               <div>
                 <p className="text-red-900 font-bold mb-2">重要な宣言</p>
                 <p className="text-red-800 leading-relaxed">
-                  株式会社ネクストスフィアは<strong>広告サービス提供会社</strong>であり、<strong>金融商品取引業者ではありません</strong>。
+                  アナグラム株式会社は<strong>広告サービス提供会社</strong>であり、<strong>金融商品取引業者ではありません</strong>。
                   金融商品取引法第29条の登録を受けた事業者ではないため、投資助言業務、投資運用業務、金融商品仲介業務等を行うことはできません。
                 </p>
               </div>
@@ -46,7 +46,7 @@ export default function CompanyNature() {
                 <dl className="space-y-3">
                   <div className="grid sm:grid-cols-3 gap-2">
                     <dt className="font-semibold text-gray-900">会社名</dt>
-                    <dd className="sm:col-span-2 text-gray-700">株式会社ネクストスフィア（NextSphere Co., Ltd.）</dd>
+                    <dd className="sm:col-span-2 text-gray-700">アナグラム株式会社（Anagrams Co., Ltd.）</dd>
                   </div>
                   <div className="grid sm:grid-cols-3 gap-2">
                     <dt className="font-semibold text-gray-900">事業分類</dt>
@@ -305,7 +305,7 @@ export default function CompanyNature() {
               <div className="bg-slate-50 rounded-lg p-6 border-l-4 border-slate-400">
                 <h3 className="font-bold text-gray-900 mb-3">English Declaration</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
-                  <strong>NextSphere Co., Ltd. is an advertising and digital marketing service provider, not a financial instruments business operator.</strong>
+                  <strong>Anagrams Co., Ltd. is an advertising and digital marketing service provider, not a financial instruments business operator.</strong>
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   This service is provided by an advertising company and is not regulated by the Financial Services Agency of Japan as a financial instruments business operator. We do not provide investment advisory services, investment management services, or financial product intermediary services.

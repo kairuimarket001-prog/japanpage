@@ -93,7 +93,7 @@ export default function Footer() {
         {/* Copyright Section */}
         <div className="border-t border-gray-300 pt-4 text-center">
           <p className="text-xs sm:text-sm mb-3 font-medium" style={{ color: '#3c0800', fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif' }}>
-            &copy; {currentYear} 株式会社ネクストスフィア (NextSphere Co., Ltd.). All rights reserved.
+            &copy; {currentYear} アナグラム株式会社 (Anagrams Co., Ltd.). All rights reserved.
           </p>
           <p className="text-xs leading-relaxed max-w-4xl mx-auto mb-2" style={{ color: '#3c0800', fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif' }}>
             当サイトで提供される情報は投資勧誘を目的としたものではありません。

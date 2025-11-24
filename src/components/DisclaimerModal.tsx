@@ -49,7 +49,7 @@ export default function DisclaimerModal({ onAccept }: DisclaimerModalProps) {
             <div className="border-l-4 border-blue-500 pl-4 py-2">
               <p className="font-semibold text-gray-900 mb-1">運営会社について</p>
               <p>
-                株式会社ネクストスフィアは<strong>広告代理業を事業とする企業</strong>であり、
+                アナグラム株式会社は<strong>広告代理業を事業とする企業</strong>であり、
                 金融商品取引業者ではありません。金融商品取引法第29条の登録を受けた事業者ではないため、
                 投資助言業務を行うことはできません。
               </p>

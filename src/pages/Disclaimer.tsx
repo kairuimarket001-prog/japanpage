@@ -38,7 +38,7 @@ export default function Disclaimer() {
               <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
                 <p className="text-blue-900 font-bold mb-2">運営会社の事業分類</p>
                 <p className="text-gray-700 leading-relaxed">
-                  <strong>株式会社ネクストスフィアは、広告代理業およびインターネット情報提供サービスを事業とする企業です。</strong>
+                  <strong>アナグラム株式会社は、広告代理業およびインターネット情報提供サービスを事業とする企業です。</strong>
                   当社は金融商品取引業者ではなく、金融サービスの提供を行う企業ではありません。
                 </p>
               </div>

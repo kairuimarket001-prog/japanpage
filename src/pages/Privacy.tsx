@@ -27,7 +27,7 @@ export default function Privacy() {
             <section className="mb-8">
               <h2 className="text-xl font-bold text-gray-900 mb-4">1. 基本方針</h2>
               <p className="text-gray-700 leading-relaxed">
-                AI株式診断サービス（以下「当サービス」）の運営者である株式会社ネクストスフィア（以下「当社」）は、利用者の個人情報の重要性を認識し、
+                AI株式診断サービス（以下「当サービス」）の運営者であるアナグラム株式会社（以下「当社」）は、利用者の個人情報の重要性を認識し、
                 個人情報の保護に関する法律（個人情報保護法）を遵守し、適切に取り扱い、保護することに努めます。
               </p>
             </section>
@@ -140,22 +140,16 @@ export default function Privacy() {
                 本ポリシーに関するご質問、個人情報の取り扱いに関するご相談は、お問い合わせフォームよりご連絡ください。
               </p>
               <p className="text-sm text-gray-700 mb-2">
-                <strong>株式会社ネクストスフィア</strong><br />
-                <strong>NextSphere Co., Ltd.</strong>
+                <strong>アナグラム株式会社</strong><br />
+                <strong>Anagrams Co., Ltd.</strong>
               </p>
               <p className="text-sm text-gray-700 mb-2">
-                〒160-6135<br />
-                東京都新宿区西新宿8丁目17-1<br />
-                住友不動産新宿グランドタワー 35階
+                〒151-0051<br />
+                東京都渋谷区千駄ヶ谷4-4-4<br />
+                フィールド北参道 1–3F
               </p>
               <p className="text-sm text-gray-700 mb-2">
-                メール: support@stocktrends.jp
-              </p>
-              <p className="text-sm text-gray-700 mb-2">
-                電話: 03-5944-8231
-              </p>
-              <p className="text-sm text-gray-700">
-                受付時間: 平日 9:00-18:00（土日祝日を除く）
+                メール: support@tokyosbi.com
               </p>
             </div>
           </div>

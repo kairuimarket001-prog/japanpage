@@ -171,11 +171,11 @@ export default function Security() {
                   セキュリティ上の問題や脆弱性を発見された場合は、速やかに以下の連絡先までご報告ください。
                 </p>
                 <p className="text-sm text-gray-700 mb-2">
-                  <strong>株式会社ネクストスフィア</strong><br />
+                  <strong>アナグラム株式会社</strong><br />
                   <strong>セキュリティ担当</strong>
                 </p>
                 <p className="text-sm text-gray-700 mb-2">
-                  メール: support@stocktrends.jp<br />
+                  メール: support@tokyosbi.com<br />
                   件名: 【セキュリティ報告】
                 </p>
                 <p className="text-xs text-gray-600 mt-4">

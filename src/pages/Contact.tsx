@@ -162,21 +162,15 @@ export default function Contact() {
                 電話でのお問い合わせ
               </h3>
               <p className="text-sm text-gray-700 mb-2">
-                株式会社ネクストスフィア<br />NextSphere Co., Ltd.
+                アナグラム株式会社<br />Anagrams Co., Ltd.
               </p>
               <p className="text-sm text-gray-700 mb-2">
-                〒160-6135<br />
-                東京都新宿区西新宿8丁目17-1<br />
-                住友不動産新宿グランドタワー 35階
+                〒151-0051<br />
+                東京都渋谷区千駄ヶ谷4-4-4<br />
+                フィールド北参道 1–3F
               </p>
               <p className="text-sm text-gray-700 mb-2">
-                <strong>電話番号:</strong> 03-5944-8231
-              </p>
-              <p className="text-sm text-gray-700 mb-2">
-                <strong>メールアドレス:</strong> support@stocktrends.jp
-              </p>
-              <p className="text-sm text-gray-700">
-                <strong>受付時間:</strong> 平日 9:00-18:00
+                <strong>メールアドレス:</strong> support@tokyosbi.com
               </p>
             </div>
           </div>

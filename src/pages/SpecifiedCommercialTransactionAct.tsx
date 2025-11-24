@@ -36,15 +36,15 @@ export default function SpecifiedCommercialTransactionAct() {
                   <dl className="space-y-3">
                     <div className="grid sm:grid-cols-3 gap-2">
                       <dt className="font-semibold text-gray-900">販売業者名</dt>
-                      <dd className="sm:col-span-2 text-gray-700">株式会社ネクストスフィア<br />NextSphere Co., Ltd.</dd>
+                      <dd className="sm:col-span-2 text-gray-700">アナグラム株式会社<br />Anagrams Co., Ltd.</dd>
                     </div>
                     <div className="grid sm:grid-cols-3 gap-2">
                       <dt className="font-semibold text-gray-900">所在地</dt>
                       <dd className="sm:col-span-2 text-gray-700">
-                         〒160-6135<br />
-                         東京都新宿区西新宿8丁目17-1<br />
-                         住友不動産新宿グランドタワー 35階<br />
-                         35F, Sumitomo Fudosan Shinjuku Grand Tower, 8-17-1 Nishi-Shinjuku, Shinjuku-ku, Tokyo 160-6135
+                         〒151-0051<br />
+                         東京都渋谷区千駄ヶ谷4-4-4<br />
+                         フィールド北参道 1–3F<br />
+                         1-3F, Field Kita-Sando, 4-4-4 Sendagaya, Shibuya-ku, Tokyo 151-0051
                       </dd>
                     </div>
                   </dl>
@@ -62,11 +62,11 @@ export default function SpecifiedCommercialTransactionAct() {
                   <dl className="space-y-3">
                     <div className="grid sm:grid-cols-3 gap-2">
                       <dt className="font-semibold text-gray-900">電話番号</dt>
-                      <dd className="sm:col-span-2 text-gray-700">03-5944-8231</dd>
+                      <dd className="sm:col-span-2 text-gray-700"></dd>
                     </div>
                     <div className="grid sm:grid-cols-3 gap-2">
                       <dt className="font-semibold text-gray-900">メールアドレス</dt>
-                      <dd className="sm:col-span-2 text-blue-600">support@stocktrends.jp</dd>
+                      <dd className="sm:col-span-2 text-blue-600">support@tokyosbi.com</dd>
                     </div>
                     <div className="grid sm:grid-cols-3 gap-2">
                       <dt className="font-semibold text-gray-900">受付時間</dt>
@@ -235,14 +235,14 @@ export default function SpecifiedCommercialTransactionAct() {
                   <Mail className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-gray-900 mb-1">メール</p>
-                    <p className="text-blue-600">support@stocktrends.jp</p>
+                    <p className="text-blue-600">support@tokyosbi.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 mb-4">
                   <Phone className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-gray-900 mb-1">電話</p>
-                    <p className="text-gray-700">03-5944-8231（平日 9:00 - 18:00）</p>
+                    <p className="text-gray-700">（平日 9:00 - 18:00）</p>
                   </div>
                 </div>
                 <Link

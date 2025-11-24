@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import ApiStatsDisplay from './components/ApiStatsDisplay';
-import DisclaimerModal from './components/DisclaimerModal';
 import NewHome from './pages/NewHome';
 import Contact from './pages/Contact';
 import Disclaimer from './pages/Disclaimer';
@@ -19,15 +18,12 @@ import AdminDashboard from './pages/AdminDashboard';
 import { initializeGoogleTracking } from './lib/googleTracking';
 
 function App() {
-  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
-
   useEffect(() => {
     initializeGoogleTracking();
   }, []);
 
   return (
     <div className="min-h-screen">
-      <DisclaimerModal onAccept={() => setDisclaimerAccepted(true)} />
       <Routes>
         <Route path="/" element={<NewHome />} />
         <Route path="/contact" element={<Contact />} />

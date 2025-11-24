@@ -27,7 +27,7 @@ export default function Terms() {
             <section className="mb-8">
               <h2 className="text-xl font-bold text-gray-900 mb-4">第1条（適用）</h2>
               <p className="text-gray-700 leading-relaxed mb-3">
-                本規約は、AI株式診断サービス（以下「当サービス」といいます）の利用に関する条件を、当サービスを利用する全ての方（以下「利用者」といいます）と株式会社ネクストスフィア（以下「当社」といいます）との間で定めるものです。
+                本規約は、AI株式診断サービス（以下「当サービス」といいます）の利用に関する条件を、当サービスを利用する全ての方（以下「利用者」といいます）とアナグラム株式会社（以下「当社」といいます）との間で定めるものです。
               </p>
               <p className="text-gray-700 leading-relaxed">
                 利用者は、当サービスを利用することにより、本規約の全ての内容に同意したものとみなされます。
@@ -40,7 +40,7 @@ export default function Terms() {
               <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
                 <p className="text-blue-900 font-bold mb-2">運営会社の事業分類</p>
                 <p className="text-gray-700 leading-relaxed">
-                  株式会社ネクストスフィアは、<strong>広告代理業およびインターネット情報提供サービス</strong>を主要事業とする企業です。
+                  アナグラム株式会社は、<strong>広告代理業およびインターネット情報提供サービス</strong>を主要事業とする企業です。
                   当社は金融商品取引業者ではなく、金融サービスの提供を行う企業ではありません。
                 </p>
               </div>
