@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-bg-light">
+    <div className="min-h-screen">
       <Routes>
         <Route path="/" element={<NewHome />} />
         <Route path="/contact" element={<Contact />} />

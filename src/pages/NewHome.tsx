@@ -328,7 +328,7 @@ export default function NewHome() {
   };
 
   return (
-    <div className="min-h-screen bg-bg-light">
+    <div className="min-h-screen">
       <Header />
 
       <div className="pt-20">
