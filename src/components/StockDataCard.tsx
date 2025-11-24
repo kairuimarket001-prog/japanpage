@@ -73,24 +73,24 @@ export default function StockDataCard({ info, latestPrice, date }: StockDataCard
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 pb-4 border-b border-gray-200">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">初値</span>
-              <span className="text-sm font-semibold text-gray-900">{latestPrice?.open || info.price}</span>
+              <span className="text-xs font-medium text-red-500">初値</span>
+              <span className="text-sm font-semibold text-growth-green" style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8)' }}>{latestPrice?.open || info.price}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">高値</span>
-              <span className="text-sm font-semibold text-gray-900">{latestPrice?.high || info.price}</span>
+              <span className="text-xs font-medium text-red-500">高値</span>
+              <span className="text-sm font-semibold text-growth-green" style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8)' }}>{latestPrice?.high || info.price}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">安値</span>
-              <span className="text-sm font-semibold text-gray-900">{latestPrice?.low || info.price}</span>
+              <span className="text-xs font-medium text-red-500">安値</span>
+              <span className="text-sm font-semibold text-growth-green" style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8)' }}>{latestPrice?.low || info.price}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">終値</span>
-              <span className="text-sm font-semibold text-gray-900">{latestPrice?.close || info.price}</span>
+              <span className="text-xs font-medium text-red-500">終値</span>
+              <span className="text-sm font-semibold text-growth-green" style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8)' }}>{latestPrice?.close || info.price}</span>
             </div>
             <div className="flex items-center gap-2 col-span-2">
-              <span className="text-xs text-gray-500">売買高(株)</span>
-              <span className="text-sm font-semibold text-gray-900">{latestPrice?.volume || 'N/A'}</span>
+              <span className="text-xs font-medium text-red-500">売買高(株)</span>
+              <span className="text-sm font-semibold text-growth-green" style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.8)' }}>{latestPrice?.volume || 'N/A'}</span>
             </div>
           </div>
 
