@@ -31,13 +31,13 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
   return (
     <div className="px-4 py-3 relative overflow-hidden">
       <div className="absolute inset-0 px-4 py-3">
-        <div className="max-w-lg mx-auto h-full rounded-2xl overflow-hidden">
-          <svg className="w-full h-full opacity-25" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <div className="max-w-lg mx-auto h-full rounded-2xl overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50">
+          <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
             <defs>
               <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#86efac" stopOpacity="0.6" />
-                <stop offset="50%" stopColor="#22c55e" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#16a34a" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="#86efac" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#22c55e" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#16a34a" stopOpacity="0.4" />
               </linearGradient>
             </defs>
             {chartData.length > 0 && (
@@ -57,8 +57,8 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
                     return `L ${x},${y}`;
                   }).join(' ')}`}
                   fill="none"
-                  stroke="#22c55e"
-                  strokeWidth="2.5"
+                  stroke="#16a34a"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -68,9 +68,9 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
         </div>
       </div>
 
-      <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card p-5 relative">{/* Removed overflow-hidden */}
+      <div className="max-w-lg mx-auto bg-white/75 backdrop-blur-sm rounded-2xl shadow-card p-5 relative">
 
-        <div className="relative z-10">
+        <div className="relative z-10 bg-white/40 rounded-xl p-4">
           <div className="mb-4">
             <h2 className="text-base font-medium text-gray-600">{info.name || '株智能報告'}</h2>
           </div>
