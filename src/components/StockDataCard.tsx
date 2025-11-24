@@ -4,9 +4,10 @@ import { StockInfo, StockPrice } from '../types/stock';
 interface StockDataCardProps {
   info: StockInfo;
   latestPrice?: StockPrice;
+  date?: string;
 }
 
-export default function StockDataCard({ info, latestPrice }: StockDataCardProps) {
+export default function StockDataCard({ info, latestPrice, date }: StockDataCardProps) {
   const [animationOffset, setAnimationOffset] = useState(0);
 
   useEffect(() => {
@@ -54,6 +55,13 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
               opacity="0.5"
             />
           </svg>
+          {date && (
+            <div className="absolute top-4 right-4 z-10">
+              <span className="text-xs font-semibold text-white px-3 py-1 rounded-full bg-growth-green/80 backdrop-blur-sm shadow-md">
+                {date}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="relative bg-white/90 rounded-2xl shadow-card p-5" style={{ zIndex: 1 }}>

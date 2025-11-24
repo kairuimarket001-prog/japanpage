@@ -70,7 +70,7 @@ export default function NewDiagnosisModal({
     <div
       className="fixed inset-0 z-[9998] flex items-center justify-center p-2 sm:p-4 backdrop-blur-md"
       style={{
-        background: 'linear-gradient(135deg, rgba(60, 8, 0, 0.90) 0%, rgba(92, 42, 20, 0.90) 50%, rgba(139, 69, 19, 0.90) 100%)'
+        background: 'linear-gradient(135deg, rgba(6, 78, 59, 0.90) 0%, rgba(16, 185, 129, 0.90) 50%, rgba(52, 211, 153, 0.90) 100%)'
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget) {

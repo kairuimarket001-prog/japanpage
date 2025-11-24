@@ -57,7 +57,7 @@ export default function DiagnosisLoadingOverlay({
       }`}
       style={{
         touchAction: 'none',
-        background: 'rgba(107, 33, 168, 0.95)'
+        background: 'linear-gradient(135deg, rgba(6, 78, 59, 0.95) 0%, rgba(16, 185, 129, 0.95) 50%, rgba(52, 211, 153, 0.95) 100%)'
       }}
     >
       <div className={`w-full max-w-lg transition-transform duration-500 ${
