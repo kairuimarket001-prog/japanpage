@@ -29,10 +29,10 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
   const isPositive = !info.change.startsWith('-');
 
   return (
-    <div className="px-4 py-3">
-      <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card p-5 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
-          <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+    <div className="px-4 py-3 relative overflow-hidden">
+      <div className="absolute inset-0 px-4 py-3">
+        <div className="max-w-lg mx-auto h-full rounded-2xl overflow-hidden">
+          <svg className="w-full h-full opacity-25" preserveAspectRatio="none" viewBox="0 0 100 100">
             <defs>
               <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#86efac" stopOpacity="0.6" />
@@ -66,6 +66,9 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
             )}
           </svg>
         </div>
+      </div>
+
+      <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card p-5 relative">{/* Removed overflow-hidden */}
 
         <div className="relative z-10">
           <div className="mb-4">
