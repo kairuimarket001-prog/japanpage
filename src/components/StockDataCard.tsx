@@ -17,46 +17,46 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
   }, []);
 
   const generateWavePath = (offset: number) => {
-    const points = 50;
-    let path = `M ${offset - 100},100 `;
+    const points = 100;
+    let path = 'M 0,0 ';
 
     for (let i = 0; i <= points; i++) {
-      const x = (i / points) * 200 + offset - 100;
-      const y = 60 + Math.sin(i * 0.4) * 15;
+      const x = (i / points) * 100;
+      const y = 30 + Math.sin((i / points) * Math.PI * 4 + offset * 0.1) * 10;
       path += `L ${x},${y} `;
     }
 
-    path += `L ${200 + offset - 100},100 L ${offset - 100},100 Z`;
+    path += 'L 100,100 L 0,100 Z';
     return path;
   };
 
   const isPositive = !info.change.startsWith('-');
 
   return (
-    <div className="px-4 py-3 relative overflow-hidden">
-      <div className="absolute inset-0 px-4 py-3 z-0">
-        <div className="max-w-lg mx-auto h-full rounded-2xl overflow-hidden bg-green-50">
+    <div className="px-4 py-3 relative">
+      <div className="max-w-lg mx-auto relative">
+        <div className="absolute inset-0 rounded-2xl overflow-hidden bg-white" style={{ zIndex: 0 }}>
           <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
             <defs>
-              <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#86efac" stopOpacity="0.5" />
+              <linearGradient id={`waveGradient-${info.code}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
+                <stop offset="50%" stopColor="#22c55e" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#86efac" stopOpacity="0.1" />
               </linearGradient>
             </defs>
             <path
               d={generateWavePath(animationOffset)}
-              fill="url(#waveGradient)"
+              fill={`url(#waveGradient-${info.code})`}
             />
             <path
-              d={generateWavePath(animationOffset + 100)}
-              fill="url(#waveGradient)"
-              opacity="0.6"
+              d={generateWavePath(animationOffset + 50)}
+              fill={`url(#waveGradient-${info.code})`}
+              opacity="0.5"
             />
           </svg>
         </div>
-      </div>
 
-      <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card p-5 relative z-10">
+        <div className="relative bg-white rounded-2xl shadow-card p-5" style={{ zIndex: 1 }}>
 
         <div className="relative z-10">
           <div className="mb-4">
@@ -99,6 +99,7 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
               </span>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
