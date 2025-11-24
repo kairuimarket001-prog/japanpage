@@ -68,26 +68,11 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
         </div>
 
         <div className="relative z-10">
-          <div className="mb-3">
-            <h2 className="text-base font-medium text-gray-600">株智能報告</h2>
+          <div className="mb-4">
+            <h2 className="text-base font-medium text-gray-600">{info.name || '株智能報告'}</h2>
           </div>
 
-          <div className="mb-2">
-            <div className="text-5xl font-bold text-gray-900 leading-tight">
-              {info.price}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 mb-4">
-            <span className={`text-xl font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
-              {info.change}
-            </span>
-            <span className={`text-xl font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
-              ({info.changePercent})
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 pt-3 border-t border-gray-200">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 pb-4 border-b border-gray-200">
             <div className="flex items-center gap-2">
               <span className="text-xs text-gray-500">初値</span>
               <span className="text-sm font-semibold text-gray-900">{latestPrice?.open || info.price}</span>
@@ -107,6 +92,20 @@ export default function StockDataCard({ info, latestPrice }: StockDataCardProps)
             <div className="flex items-center gap-2 col-span-2">
               <span className="text-xs text-gray-500">売買高(株)</span>
               <span className="text-sm font-semibold text-gray-900">{latestPrice?.volume || 'N/A'}</span>
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-end justify-between">
+            <div className="text-4xl font-bold text-gray-900 leading-tight">
+              {info.price}
+            </div>
+            <div className="flex items-center gap-2">
+              <span className={`text-lg font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
+                {info.change}
+              </span>
+              <span className={`text-lg font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
+                ({info.changePercent})
+              </span>
             </div>
           </div>
         </div>
