@@ -78,7 +78,7 @@ export default function StockCarousel({ prices, stockName }: StockCarouselProps)
                     </div>
                   </div>
 
-                  <div className="w-24 h-12">
+                  <div className="relative w-24 h-12">
                     <svg className="w-full h-full" preserveAspectRatio="none">
                       <path
                         d={`M 0,${50 - (chartPoints[0] / maxValue) * 40} ${chartPoints.map((value, i) => {
@@ -100,6 +100,11 @@ export default function StockCarousel({ prices, stockName }: StockCarouselProps)
                         vectorEffect="non-scaling-stroke"
                       />
                     </svg>
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span className="text-xs font-semibold text-white px-2 py-0.5 rounded bg-growth-green/90 shadow-sm">
+                        {new Date(price.date).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric' })}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
