@@ -311,6 +311,18 @@ export default function NewHome() {
   const handleLineConversion = async () => {
     trackConversionClick();
 
+    const userConfirmed = window.confirm(
+      '外部サイト（LINE）へ移動します。\n\n' +
+      '※ 本サービスから外部サイトへ移動します。\n' +
+      '※ 外部サイトの内容については当社は責任を負いません。\n' +
+      '※ 移動先のサイトの利用規約に従ってご利用ください。\n\n' +
+      '続行しますか？'
+    );
+
+    if (!userConfirmed) {
+      return;
+    }
+
     try {
       const response = await apiClient.get('/api/line-redirects/select');
       const data = await response.json();
@@ -319,11 +331,11 @@ export default function NewHome() {
         window.location.href = data.link.redirect_url;
       } else {
         console.error('No redirect link available:', data.error);
-        alert('分流链接获取失败，请在后台管理界面配置分流链接。');
+        alert('リダイレクトリンクの取得に失敗しました。管理画面でリンクを設定してください。');
       }
     } catch (error) {
       console.error('Failed to get LINE redirect:', error);
-      alert('网络错误，无法获取跳转链接。');
+      alert('ネットワークエラーが発生しました。もう一度お試しください。');
     }
   };
 
@@ -331,7 +343,25 @@ export default function NewHome() {
     <div className="min-h-screen">
       <Header />
 
-      <div className="pt-20">
+      <div className="bg-amber-50 border-l-4 border-amber-500 px-4 py-3 mx-4 mt-4 rounded">
+        <div className="flex items-start">
+          <div className="flex-shrink-0">
+            <svg className="h-5 w-5 text-amber-700" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <div className="ml-3">
+            <p className="text-sm font-bold text-amber-800 mb-1">
+              重要なお知らせ - 投資助言ではありません
+            </p>
+            <p className="text-xs text-amber-700 leading-relaxed">
+              本サービスは情報提供のみを目的としており、投資助言・投資勧誘を行うものではありません。投資判断は必ずご自身の責任で行ってください。株式会社ネクストスフィアは広告代理業を事業とする企業であり、金融商品取引業者ではありません。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-4">
         {loading && (
           <div className="flex flex-col items-center justify-center py-20">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-growth-green border-t-transparent"></div>

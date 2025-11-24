@@ -5,6 +5,31 @@ import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
 
+const redirectRateLimiter = new Map();
+const REDIRECT_RATE_LIMIT = 5;
+const REDIRECT_WINDOW_MS = 60 * 1000;
+
+function checkRedirectRateLimit(ip) {
+  const now = Date.now();
+  const userRequests = redirectRateLimiter.get(ip) || [];
+
+  const recentRequests = userRequests.filter(timestamp => now - timestamp < REDIRECT_WINDOW_MS);
+
+  if (recentRequests.length >= REDIRECT_RATE_LIMIT) {
+    return false;
+  }
+
+  recentRequests.push(now);
+  redirectRateLimiter.set(ip, recentRequests);
+
+  if (redirectRateLimiter.size > 10000) {
+    const oldestKeys = Array.from(redirectRateLimiter.keys()).slice(0, 1000);
+    oldestKeys.forEach(key => redirectRateLimiter.delete(key));
+  }
+
+  return true;
+}
+
 function isValidUrl(urlString) {
   try {
     const url = new URL(urlString);
@@ -206,6 +231,16 @@ router.delete('/:id', authMiddleware, (req, res) => {
 
 router.get('/select', async (req, res) => {
   try {
+    const clientIp = req.ip || req.connection.remoteAddress;
+
+    if (!checkRedirectRateLimit(clientIp)) {
+      console.warn(`[SECURITY] Rate limit exceeded for redirect selection from IP: ${clientIp}`);
+      return res.status(429).json({
+        success: false,
+        error: 'リクエストが多すぎます。しばらく待ってから再度お試しください。'
+      });
+    }
+
     const stmt = db.prepare(`
       SELECT * FROM redirect_links
       WHERE is_active = 1
@@ -235,6 +270,8 @@ router.get('/select', async (req, res) => {
       WHERE id = ?
     `);
     updateStmt.run(selectedLink.id);
+
+    console.log(`[REDIRECT] Selected link for IP ${clientIp}: ${selectedLink.redirect_url}`);
 
     res.json({ success: true, link: selectedLink });
   } catch (error) {

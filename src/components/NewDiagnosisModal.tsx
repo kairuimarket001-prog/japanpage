@@ -14,22 +14,66 @@ interface NewDiagnosisModalProps {
   onLineConversion?: () => void;
 }
 
-const formatAnalysisText = (text: string) => {
-  const lines = text.split('\n');
-  return lines.map((line, index) => {
-    const formattedLine = line.replace(/(\d+\.?\d*%?|\d+円|[+-]\d+\.?\d*)/g, (match) => {
-      return `<span style="color: #8B4513;" class="font-semibold text-lg">${match}</span>`;
-    });
+interface FormattedTextSegment {
+  text: string;
+  isHighlight: boolean;
+}
 
-    const isBold = line.includes('###') || line.includes('**') || line.match(/^[\d]+\./);
-    const cleanLine = formattedLine.replace(/###|\*\*/g, '');
+const parseLineSegments = (line: string): FormattedTextSegment[] => {
+  const segments: FormattedTextSegment[] = [];
+  const regex = /(\d+\.?\d*%?|\d+円|[+-]\d+\.?\d*)/g;
+  let lastIndex = 0;
+  let match;
 
-    if (isBold) {
-      return `<div key="${index}" class="font-bold text-gray-900 mt-4 mb-2">${cleanLine}</div>`;
+  while ((match = regex.exec(line)) !== null) {
+    if (match.index > lastIndex) {
+      segments.push({ text: line.substring(lastIndex, match.index), isHighlight: false });
     }
+    segments.push({ text: match[0], isHighlight: true });
+    lastIndex = regex.lastIndex;
+  }
 
-    return `<div key="${index}" class="text-gray-700">${cleanLine}</div>`;
-  }).join('');
+  if (lastIndex < line.length) {
+    segments.push({ text: line.substring(lastIndex), isHighlight: false });
+  }
+
+  return segments.length > 0 ? segments : [{ text: line, isHighlight: false }];
+};
+
+const renderAnalysisLine = (line: string, index: number) => {
+  const isBold = line.includes('###') || line.includes('**') || line.match(/^[\d]+\./);
+  const cleanLine = line.replace(/###|\*\*/g, '');
+  const segments = parseLineSegments(cleanLine);
+
+  if (isBold) {
+    return (
+      <div key={index} className="font-bold text-gray-900 mt-4 mb-2">
+        {segments.map((seg, i) =>
+          seg.isHighlight ? (
+            <span key={i} style={{ color: '#8B4513' }} className="font-semibold text-lg">
+              {seg.text}
+            </span>
+          ) : (
+            <span key={i}>{seg.text}</span>
+          )
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div key={index} className="text-gray-700">
+      {segments.map((seg, i) =>
+        seg.isHighlight ? (
+          <span key={i} style={{ color: '#8B4513' }} className="font-semibold text-lg">
+            {seg.text}
+          </span>
+        ) : (
+          <span key={i}>{seg.text}</span>
+        )
+      )}
+    </div>
+  );
 };
 
 export default function NewDiagnosisModal({
@@ -113,7 +157,9 @@ export default function NewDiagnosisModal({
                     </div>
                   ) : (
                     <>
-                      <div dangerouslySetInnerHTML={{ __html: formatAnalysisText(analysis) }} />
+                      <div>
+                        {analysis.split('\n').map((line, index) => renderAnalysisLine(line, index))}
+                      </div>
                       {isStreaming && (
                         <span className="inline-block w-2 h-4 bg-growth-green animate-pulse ml-1"></span>
                       )}

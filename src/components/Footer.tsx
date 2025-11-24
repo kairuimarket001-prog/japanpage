@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ExternalLink, AlertTriangle, Activity } from 'lucide-react';
+import { ExternalLink, AlertTriangle, Activity, Shield } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -60,6 +60,14 @@ export default function Footer() {
               style={{ color: '#3c0800', fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif' }}
             >
               FAQ <ExternalLink className="w-3 h-3" />
+            </Link>
+            <Link
+              to="/security"
+              className="inline-flex items-center gap-1 hover:underline text-xs sm:text-sm justify-center font-semibold"
+              style={{ color: '#059669', fontFamily: 'HiraKakuPro-W3, Hiragino Kaku Gothic Pro, sans-serif' }}
+            >
+              <Shield className="w-3 h-3" />
+              セキュリティ
             </Link>
             <Link
               to="/api-stats"
