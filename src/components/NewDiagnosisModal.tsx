@@ -1,6 +1,5 @@
-import { X, ExternalLink } from 'lucide-react';
+import { X, ExternalLink, Brain } from 'lucide-react';
 import { useEffect } from 'react';
-import RobotScholarIcon from './RobotScholarIcon';
 
 interface NewDiagnosisModalProps {
   isOpen: boolean;
@@ -80,44 +79,43 @@ export default function NewDiagnosisModal({
       }}
     >
       <div className="relative w-full max-w-3xl max-h-[95vh] z-[9999]" onClick={(e) => e.stopPropagation()}>
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[60%] z-[10000] scale-75 sm:scale-100 pointer-events-none">
-          <RobotScholarIcon />
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[50%] z-[10000] pointer-events-none">
+          <div className="bg-growth-green p-4 rounded-full shadow-lg">
+            <Brain className="w-12 h-12 text-white" strokeWidth={2} />
+          </div>
         </div>
 
-        <div className="relative bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden border-4 border-white pt-0 sm:pt-16">
-          <div className="relative sticky top-0 px-3 py-2 sm:px-5 sm:py-3 flex items-center justify-between border-b-4 backdrop-blur-sm z-10 shadow-lg" style={{ background: 'linear-gradient(to right, #3c0800, #8B4513)', borderColor: '#2a0600' }}>
+        <div className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden pt-8 sm:pt-12">
+          <div className="relative sticky top-0 px-3 py-3 sm:px-5 sm:py-4 flex items-center justify-between border-b-2 bg-white z-10 shadow-md" style={{ borderColor: '#e5e7eb' }}>
           <div className="flex-1 text-center pr-8">
-            <h2 className="text-base sm:text-lg md:text-xl font-bold text-white drop-shadow-lg">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
               {stockName}（{stockCode}）AI市場分析レポート（参考資料）
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1 sm:p-2 hover:bg-white/30 rounded-lg transition-colors backdrop-blur-sm hover:shadow-lg"
+            className="p-1 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="閉じる"
           >
-            <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
           </button>
         </div>
 
-        <div className="relative overflow-y-auto max-h-[calc(95vh-180px)] sm:max-h-[calc(95vh-200px)] px-3 py-3 sm:px-5 sm:py-4 space-y-3 sm:space-y-4" style={{ background: 'linear-gradient(to bottom right, #f5e6d3, #e8d4bf)' }}>
+        <div className="relative overflow-y-auto max-h-[calc(95vh-180px)] sm:max-h-[calc(95vh-200px)] px-3 py-3 sm:px-5 sm:py-4 space-y-3 sm:space-y-4 bg-gray-50">
 
-          <div className="relative bg-white/80 backdrop-blur-xl rounded-lg sm:rounded-xl p-4 sm:p-5 border-2 overflow-hidden shadow-xl" style={{ borderColor: '#d4a574' }}>
-            <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'linear-gradient(to bottom right, rgba(139, 69, 19, 0.15), rgba(210, 105, 30, 0.15))' }}></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-36 sm:h-36 rounded-full blur-3xl pointer-events-none" style={{ background: 'linear-gradient(to top right, rgba(139, 69, 19, 0.15), rgba(210, 105, 30, 0.15))' }}></div>
-
+          <div className="relative bg-white rounded-lg sm:rounded-xl p-4 sm:p-5 shadow-card">
             <div className="relative space-y-2 sm:space-y-3">
-              <div className="bg-white rounded-lg p-3 sm:p-4 border-2 backdrop-blur-sm shadow-lg" style={{ borderColor: '#d4a574' }}>
+              <div className="bg-white rounded-lg p-3 sm:p-4">
                 <div className="text-xs sm:text-sm text-gray-700 leading-relaxed space-y-2">
                   {isConnecting ? (
                     <div className="text-center py-4">
-                      <p className="font-bold" style={{ color: '#8B4513' }}>市場データ分析中...</p>
+                      <p className="font-bold text-growth-green">市場データ分析中...</p>
                     </div>
                   ) : (
                     <>
                       <div dangerouslySetInnerHTML={{ __html: formatAnalysisText(analysis) }} />
                       {isStreaming && (
-                        <span className="inline-block w-2 h-4 animate-pulse ml-1" style={{ background: 'linear-gradient(to right, #3c0800, #8B4513)' }}></span>
+                        <span className="inline-block w-2 h-4 bg-growth-green animate-pulse ml-1"></span>
                       )}
                     </>
                   )}
@@ -128,31 +126,14 @@ export default function NewDiagnosisModal({
                 <>
                   <button
                     onClick={onLineConversion}
-                    className="relative overflow-hidden w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-4 px-6 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-3 text-sm mt-6 animate-button-pulse animate-glow-ring-green group"
-                    style={{ willChange: 'transform' }}
+                    className="w-full bg-growth-green text-white font-bold py-4 px-6 rounded-lg hover:bg-growth-green-dark transition-all shadow-button hover:shadow-lg flex items-center justify-center gap-3 text-sm mt-6"
                   >
-                    <div
-                      className="absolute inset-0 opacity-20 animate-gradient-shift"
-                      style={{
-                        background: 'linear-gradient(90deg, rgba(34,197,94,0.3) 0%, rgba(74,222,128,0.5) 50%, rgba(34,197,94,0.3) 100%)',
-                        backgroundSize: '200% 100%'
-                      }}
-                    />
-
-                    <div
-                      className="absolute inset-0 w-[30%] h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:animate-[shimmer-sweep_2s_ease-in-out]"
-                      style={{
-                        animation: 'shimmer-sweep 5s ease-in-out infinite',
-                        animationDelay: '1.5s'
-                      }}
-                    />
-
-                    <ExternalLink className="relative w-6 h-6 animate-icon-bounce" />
-                    <span className="relative">市場分析情報をLINEで受け取る（参考情報）</span>
+                    <ExternalLink className="w-6 h-6" />
+                    <span>市場分析情報をLINEで受け取る（参考情報）</span>
                   </button>
 
-                  <div className="mt-3 p-3 bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-lg border border-green-600/30">
-                    <p className="text-xs text-green-200 leading-relaxed">
+                  <div className="mt-3 p-3 bg-growth-green/10 rounded-lg border border-growth-green/30">
+                    <p className="text-xs text-gray-700 leading-relaxed">
                       LINEで登録すると、参考情報として市場分析レポートをお届けします。※投資助言ではありません
                     </p>
                   </div>

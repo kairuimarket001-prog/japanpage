@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import RobotScholarIcon from './RobotScholarIcon';
+import { Brain } from 'lucide-react';
 
 interface DiagnosisLoadingOverlayProps {
   isVisible: boolean;
@@ -57,54 +57,46 @@ export default function DiagnosisLoadingOverlay({
       }`}
       style={{
         touchAction: 'none',
-        background: 'linear-gradient(135deg, rgba(60, 8, 0, 0.95) 0%, rgba(92, 42, 20, 0.95) 50%, rgba(139, 69, 19, 0.95) 100%)'
+        background: 'rgba(107, 33, 168, 0.95)'
       }}
     >
       <div className={`w-full max-w-lg transition-transform duration-500 ${
         isExiting ? 'scale-95' : 'scale-100'
       }`}>
-        <div className="relative bg-white/95 backdrop-blur-sm border-4 border-white rounded-2xl shadow-2xl p-8 overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              background: 'linear-gradient(135deg, rgba(60,8,0,0.3) 0%, rgba(92,42,20,0.2) 50%, rgba(139,69,19,0.3) 100%)'
-            }}
-          />
-
+        <div className="relative bg-white rounded-2xl shadow-2xl p-8 overflow-hidden">
           <div className="relative">
-            <RobotScholarIcon />
-
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r mb-2 text-center" style={{ backgroundImage: 'linear-gradient(to right, #3c0800, #8B4513)' }}>市場データ分析中</h3>
-              <p className="text-sm font-semibold text-center" style={{ color: '#5a2a14' }}>参考情報を生成しています...</p>
+            <div className="flex justify-center mb-6">
+              <div className="bg-growth-green p-6 rounded-full animate-pulse-gentle">
+                <Brain className="w-16 h-16 text-white" strokeWidth={2} />
+              </div>
             </div>
 
-            <div className="relative w-full h-4 rounded-full overflow-hidden mb-3 border-2 shadow-inner" style={{ background: 'linear-gradient(to right, #f5e6d3, #e8d4bf)', borderColor: '#8B4513' }}>
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">市場データ分析中</h3>
+              <p className="text-sm text-gray-600 text-center">参考情報を生成しています...</p>
+            </div>
+
+            <div className="relative w-full h-3 rounded-full overflow-hidden mb-3 bg-gray-200">
               <div
-                className="absolute top-0 left-0 h-full transition-all duration-300 ease-out animate-gradient-shift shadow-lg"
+                className="absolute top-0 left-0 h-full transition-all duration-300 ease-out bg-growth-green"
                 style={{
-                  width: `${Math.min(progress, 100)}%`,
-                  background: 'linear-gradient(to right, #3c0800, #8B4513, #5a2a14)',
-                  backgroundSize: '200% 100%'
+                  width: `${Math.min(progress, 100)}%`
                 }}
-              />
-              <div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-[shimmer_1.5s_ease-in-out_infinite]"
               />
             </div>
 
             <div className="mb-6 text-center">
-              <span className="text-2xl font-bold text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(to right, #3c0800, #8B4513)' }}>
+              <span className="text-2xl font-bold text-growth-green">
                 {Math.floor(Math.min(progress, 100))}%
               </span>
             </div>
 
-            <div className="border-3 rounded-xl p-6 shadow-lg" style={{ background: 'linear-gradient(to bottom right, #f5e6d3, #e8d4bf)', borderColor: '#8B4513' }}>
+            <div className="bg-gray-50 rounded-xl p-6">
               <div className="space-y-3 text-sm">
-                <p className="font-bold text-center text-base" style={{ color: '#3c0800' }}>
+                <p className="font-bold text-center text-base text-gray-900">
                   AIによる情報分析中（参考資料作成）
                 </p>
-                <p className="font-semibold text-center" style={{ color: '#5a2a14' }}>
+                <p className="font-semibold text-center text-gray-600">
                   しばらくお待ちください
                 </p>
               </div>

@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import HeroSection from '../components/HeroSection';
-import SplitStockCard from '../components/SplitStockCard';
-import PulsingButton from '../components/PulsingButton';
-import ScrollingHistoryData from '../components/ScrollingHistoryData';
-import CircularAnalysisNav from '../components/CircularAnalysisNav';
+import Header from '../components/Header';
+import StockDataCard from '../components/StockDataCard';
+import CTAButton from '../components/CTAButton';
+import StockCarousel from '../components/StockCarousel';
 import DiagnosisLoadingOverlay from '../components/DiagnosisLoadingOverlay';
 import NewDiagnosisModal from '../components/NewDiagnosisModal';
 import { StockData } from '../types/stock';
@@ -136,7 +135,6 @@ export default function NewHome() {
     setLoadingProgress(0);
     setShowLoadingOverlay(true);
 
-    // 清除之前的interval（如果存在）
     if (progressIntervalRef.current) {
       clearInterval(progressIntervalRef.current);
     }
@@ -296,7 +294,6 @@ export default function NewHome() {
     }
   };
 
-
   const closeModal = () => {
     setDiagnosisState('initial');
     setAnalysisResult('');
@@ -315,14 +312,10 @@ export default function NewHome() {
     trackConversionClick();
 
     try {
-      console.log('Fetching LINE redirect link...');
       const response = await apiClient.get('/api/line-redirects/select');
       const data = await response.json();
 
-      console.log('Redirect API response:', data);
-
       if (data.success && data.link) {
-        console.log('Redirecting to:', data.link.redirect_url);
         window.location.href = data.link.redirect_url;
       } else {
         console.error('No redirect link available:', data.error);
@@ -335,47 +328,40 @@ export default function NewHome() {
   };
 
   return (
-    <div className="min-h-screen relative">
-      <HeroSection
-        stockCode={stockCode}
-        stockName={stockData?.info.name}
-        onDiagnosis={runDiagnosis}
-        disabled={!hasRealData || diagnosisState !== 'initial'}
-      />
+    <div className="min-h-screen bg-bg-light">
+      <Header />
 
-      <div className="pb-2">
+      <div className="pt-20">
         {loading && (
-          <div className="text-center py-12 md:py-16">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-4 border-accent-gold border-t-white"></div>
-            <p className="mt-4 text-white font-medium text-sm sm:text-base">株価データを読み込んでいます...</p>
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-growth-green border-t-transparent"></div>
+            <p className="mt-4 text-gray-700 font-medium">株価データを読み込んでいます...</p>
           </div>
         )}
 
         {stockData && diagnosisState === 'initial' && (
           <>
-            <SplitStockCard
+            <StockDataCard
               info={stockData.info}
               latestPrice={stockData.prices[0]}
             />
 
-            <PulsingButton
+            <CTAButton
               onClick={runDiagnosis}
               stockName={stockData.info.name}
               disabled={!hasRealData}
             />
 
-            <ScrollingHistoryData
+            <StockCarousel
               prices={stockData.prices}
               stockName={stockData.info.name}
             />
 
-            <PulsingButton
+            <CTAButton
               onClick={runDiagnosis}
               stockName={stockData.info.name}
               disabled={!hasRealData}
             />
-
-            <CircularAnalysisNav />
           </>
         )}
 
@@ -386,26 +372,18 @@ export default function NewHome() {
         />
 
         {diagnosisState === 'error' && (
-          <div className="text-center py-12 sm:py-16 md:py-20 px-4">
-            <div className="max-w-2xl mx-auto p-5 sm:p-6 md:p-8 bg-accent-red/20 backdrop-blur-sm border border-accent-red rounded-2xl shadow-red-glow">
-              <h3 className="text-lg sm:text-xl font-bold text-accent-red mb-3 sm:mb-4">診断エラー</h3>
-              <p className="text-sm sm:text-base text-gray-300 font-semibold mb-5 sm:mb-6">{error}</p>
+          <div className="px-4 py-20">
+            <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-card p-8 text-center">
+              <h3 className="text-xl font-bold text-red-500 mb-4">診断エラー</h3>
+              <p className="text-gray-700 mb-6">{error}</p>
               <button
                 onClick={() => {
                   setDiagnosisState('initial');
                   setError(null);
                 }}
-                className="relative overflow-hidden px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-lg hover:from-blue-500 hover:to-blue-400 transition-all shadow-blue-glow text-sm sm:text-base touch-manipulation min-h-[44px] animate-shake-subtle animate-glow-ring-blue group"
-                style={{ willChange: 'transform' }}
+                className="px-8 py-3 bg-growth-green text-white font-bold rounded-lg hover:bg-growth-green-dark transition-colors"
               >
-                <div
-                  className="absolute inset-0 opacity-20 animate-gradient-shift"
-                  style={{
-                    background: 'linear-gradient(90deg, rgba(59,130,246,0.3) 0%, rgba(96,165,250,0.5) 50%, rgba(59,130,246,0.3) 100%)',
-                    backgroundSize: '200% 100%'
-                  }}
-                />
-                <span className="relative">もう一度試す</span>
+                もう一度試す
               </button>
             </div>
           </div>
