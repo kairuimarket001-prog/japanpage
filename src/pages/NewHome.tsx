@@ -339,8 +339,8 @@ export default function NewHome() {
     <div className="min-h-screen">
       <Header />
 
-      <div className="bg-amber-50 border-l-4 border-amber-500 px-4 py-2 mx-4 mt-4">
-        <p className="text-xs text-amber-900">
+      <div className="bg-amber-50 border-l-4 border-amber-500 px-5 py-3 mx-4 mt-4 rounded-r-lg shadow-sm">
+        <p className="text-sm text-amber-900 leading-relaxed">
           <strong>免責事項：</strong>本サービスは情報提供のみを目的とし、投資助言ではありません。投資判断はご自身の責任で行ってください。
         </p>
       </div>
