@@ -339,13 +339,13 @@ export default function NewHome() {
     <div className="min-h-screen">
       <Header />
 
-      <div className="bg-amber-50 border-l-4 border-amber-500 px-5 py-3 mx-4 mt-4 rounded-r-lg shadow-sm">
+      <div className="bg-amber-50 border-l-4 border-amber-500 px-5 py-3 mx-4 mt-2 rounded-r-lg shadow-sm">
         <p className="text-sm text-amber-900 leading-relaxed">
           <strong>免責事項：</strong>本サービスは情報提供のみを目的とし、投資助言ではありません。投資判断はご自身の責任で行ってください。
         </p>
       </div>
 
-      <div className="pt-4">
+      <div className="pt-2">
         {loading && (
           <div className="flex flex-col items-center justify-center py-20">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-growth-green border-t-transparent"></div>

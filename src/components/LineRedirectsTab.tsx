@@ -49,8 +49,8 @@ export default function LineRedirectsTab() {
   };
 
   const handleAddLink = async () => {
-    if (!newLink.line_url.includes('line.me')) {
-      alert('请输入有效的LINE链接（必须包含 line.me）');
+    if (!newLink.line_url.startsWith('http://') && !newLink.line_url.startsWith('https://')) {
+      alert('请输入有效的URL（必须以 http:// 或 https:// 开头）');
       return;
     }
 
@@ -76,8 +76,8 @@ export default function LineRedirectsTab() {
   };
 
   const handleUpdateLink = async (id: string) => {
-    if (!editForm.line_url.includes('line.me')) {
-      alert('请输入有效的LINE链接（必须包含 line.me）');
+    if (!editForm.line_url.startsWith('http://') && !editForm.line_url.startsWith('https://')) {
+      alert('请输入有效的URL（必须以 http:// 或 https:// 开头）');
       return;
     }
 
@@ -172,8 +172,8 @@ export default function LineRedirectsTab() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">LINE分流链接管理</h2>
-          <p className="text-sm text-slate-600 mt-1">创建和管理多个LINE链接，系统将根据权重自动分配流量</p>
+          <h2 className="text-2xl font-bold text-slate-900">分流链接管理</h2>
+          <p className="text-sm text-slate-600 mt-1">创建和管理多个跳转链接，系统将根据权重自动分配流量</p>
         </div>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
@@ -187,17 +187,17 @@ export default function LineRedirectsTab() {
       {/* Add Form */}
       {showAddForm && (
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 className="font-bold text-slate-900 mb-4">添加新的LINE链接</h3>
+          <h3 className="font-bold text-slate-900 mb-4">添加新的跳转链接</h3>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
-                LINE URL <span className="text-red-500">*</span>
+                跳转URL <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 value={newLink.line_url}
                 onChange={(e) => setNewLink({ ...newLink, line_url: e.target.value })}
-                placeholder="https://line.me/R/ti/p/@example"
+                placeholder="https://example.com 或 https://line.me/R/ti/p/@example"
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
               />
             </div>
@@ -279,7 +279,7 @@ export default function LineRedirectsTab() {
                 <div className="p-6">
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">LINE URL</label>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">跳转URL</label>
                       <input
                         type="text"
                         value={editForm.line_url}

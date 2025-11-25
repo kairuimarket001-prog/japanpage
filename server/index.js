@@ -73,16 +73,15 @@ app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader('Content-Security-Policy',
     "default-src 'self'; " +
-    "script-src 'self' 'sha256-' https://www.googletagmanager.com https://www.google-analytics.com; " +
+    "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "img-src 'self' data: https:; " +
     "font-src 'self' data: https://fonts.gstatic.com; " +
-    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; " +
+    "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net; " +
+    "frame-src https://www.googletagmanager.com; " +
     "frame-ancestors 'none'; " +
     "base-uri 'self'; " +
-    "form-action 'self'; " +
-    "upgrade-insecure-requests; " +
-    "block-all-mixed-content"
+    "form-action 'self'"
   );
 
   res.setHeader('X-Frame-Options', 'DENY');

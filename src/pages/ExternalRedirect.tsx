@@ -84,6 +84,10 @@ export default function ExternalRedirect() {
     };
 
     fetchRedirectUrl();
+  }, [searchParams, navigate]);
+
+  useEffect(() => {
+    if (!redirectUrl) return;
 
     const startTime = Date.now();
     const interval = setInterval(() => {
@@ -107,17 +111,13 @@ export default function ExternalRedirect() {
       if (newProgress >= 100) {
         clearInterval(interval);
         setTimeout(() => {
-          if (redirectUrl) {
-            window.location.href = redirectUrl;
-          } else {
-            navigate('/');
-          }
+          window.location.href = redirectUrl;
         }, 300);
       }
     }, 50);
 
     return () => clearInterval(interval);
-  }, [searchParams, navigate, totalDuration, redirectUrl]);
+  }, [redirectUrl, totalDuration, securityChecks]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 flex items-center justify-center p-4">

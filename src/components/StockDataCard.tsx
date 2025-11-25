@@ -34,7 +34,7 @@ export default function StockDataCard({ info, latestPrice, date }: StockDataCard
   const isPositive = !info.change.startsWith('-');
 
   return (
-    <div className="px-4 py-3 relative">
+    <div className="px-4 py-2 relative">
       <div className="max-w-lg mx-auto relative">
         <div className="absolute inset-0 rounded-2xl overflow-hidden bg-white" style={{ zIndex: 0 }}>
           <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -64,11 +64,11 @@ export default function StockDataCard({ info, latestPrice, date }: StockDataCard
           )}
         </div>
 
-        <div className="relative bg-white/80 rounded-2xl shadow-card p-5" style={{ zIndex: 1 }}>
+        <div className="relative bg-white/80 rounded-2xl shadow-card p-4" style={{ zIndex: 1 }}>
 
         <div className="relative z-10">
-          <div className="mb-4">
-            <h2 className="text-base font-medium text-gray-600">{info.name || '株智能報告'}</h2>
+          <div className="mb-3">
+            <h2 className="text-xl font-medium text-gray-600">{info.name || '株智能報告'}</h2>
           </div>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 pb-4 border-b border-gray-200">
@@ -94,15 +94,15 @@ export default function StockDataCard({ info, latestPrice, date }: StockDataCard
             </div>
           </div>
 
-          <div className="mt-4 flex items-end justify-between">
-            <div className="text-4xl font-bold text-gray-900 leading-tight">
+          <div className="mt-3 flex items-end justify-between">
+            <div className="text-2xl font-bold text-gray-900 leading-tight">
               {info.price}
             </div>
             <div className="flex items-center gap-2">
-              <span className={`text-lg font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
+              <span className={`text-base font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
                 {info.change}
               </span>
-              <span className={`text-lg font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
+              <span className={`text-base font-bold ${isPositive ? 'text-growth-green' : 'text-red-500'}`}>
                 ({info.changePercent})
               </span>
             </div>
