@@ -15,6 +15,8 @@ export default function ExternalRedirect() {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [redirectUrl, setRedirectUrl] = useState('');
+  const [showLineDownload, setShowLineDownload] = useState(false);
+  const [lineDownloadUrl, setLineDownloadUrl] = useState('');
   const [totalDuration] = useState(() => 2000 + Math.random() * 2000);
   const [securityChecks, setSecurityChecks] = useState<SecurityCheck[]>([
     {
@@ -49,6 +51,26 @@ export default function ExternalRedirect() {
         i === index ? { ...check, completed: true } : check
       )
     );
+  };
+
+  const checkLineApp = (url: string): boolean => {
+    return url.includes('line.me');
+  };
+
+  const isLineAppInstalled = (): boolean => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isAndroid = /android/.test(userAgent);
+
+    if (isIOS || isAndroid) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleLineDownload = () => {
+    window.open(lineDownloadUrl, '_blank');
   };
 
   useEffect(() => {
@@ -89,6 +111,21 @@ export default function ExternalRedirect() {
   useEffect(() => {
     if (!redirectUrl) return;
 
+    const isLineUrl = checkLineApp(redirectUrl);
+    const hasLineApp = isLineAppInstalled();
+
+    if (isLineUrl && !hasLineApp) {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isIOS = /iphone|ipad|ipod/.test(userAgent);
+      const downloadUrl = isIOS
+        ? 'https://apps.apple.com/jp/app/line/id443904275'
+        : 'https://play.google.com/store/apps/details?id=jp.naver.line.android';
+
+      setLineDownloadUrl(downloadUrl);
+      setShowLineDownload(true);
+      return;
+    }
+
     const startTime = Date.now();
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -124,19 +161,45 @@ export default function ExternalRedirect() {
       <div className="max-w-2xl w-full">
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-green-100">
 
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-growth-green to-emerald-400 rounded-full mb-4 shadow-lg">
-              <Shield className="w-10 h-10 text-white animate-pulse" />
+          {showLineDownload ? (
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full mb-6 shadow-lg">
+                <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+              </div>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                LINEアプリが必要です
+              </h1>
+              <p className="text-gray-600 text-lg mb-8">
+                検出したところ、LINEアプリがインストールされていない可能性があります。<br />
+                以下のLINE公式ダウンロードページからアプリをインストールしてください。
+              </p>
+              <button
+                onClick={handleLineDownload}
+                className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              >
+                LINE公式ダウンロード
+              </button>
+              <p className="text-sm text-gray-500 mt-6">
+                ボタンをクリックすると新しいタブで開きます
+              </p>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              セキュリティ認証中
-            </h1>
-            <p className="text-gray-600 text-lg">
-              安全な接続を確立しています
-            </p>
-          </div>
+          ) : (
+            <>
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-growth-green to-emerald-400 rounded-full mb-4 shadow-lg">
+                  <Shield className="w-10 h-10 text-white animate-pulse" />
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                  セキュリティ認証中
+                </h1>
+                <p className="text-gray-600 text-lg">
+                  安全な接続を確立しています
+                </p>
+              </div>
 
-          <div className="relative w-full h-6 bg-gray-200 rounded-full overflow-hidden mb-10 shadow-inner">
+              <div className="relative w-full h-6 bg-gray-200 rounded-full overflow-hidden mb-10 shadow-inner">
             <div
               className="absolute h-full bg-gradient-to-r from-growth-green via-emerald-400 to-growth-green transition-all duration-200 ease-out rounded-full"
               style={{
@@ -152,7 +215,7 @@ export default function ExternalRedirect() {
             </div>
           </div>
 
-          <div className="space-y-4 mb-10">
+              <div className="space-y-4 mb-10">
             {securityChecks.map((check) => (
               <div
                 key={check.id}
@@ -175,7 +238,7 @@ export default function ExternalRedirect() {
             ))}
           </div>
 
-          <div className="flex justify-center gap-10 mb-8">
+              <div className="flex justify-center gap-10 mb-8">
             <div className="relative">
               <Shield className="w-14 h-14 text-growth-green" strokeWidth={1.5} />
               <div className="absolute inset-0 w-14 h-14 bg-growth-green opacity-20 rounded-full animate-ping" />
@@ -190,14 +253,16 @@ export default function ExternalRedirect() {
             </div>
           </div>
 
-          <div className="text-center border-t-2 border-green-100 pt-6">
-            <p className="text-gray-700 font-semibold mb-2">
-              お客様の安全を最優先に考えています
-            </p>
-            <p className="text-sm text-gray-500">
-              外部サービスへ安全に接続しています
-            </p>
-          </div>
+              <div className="text-center border-t-2 border-green-100 pt-6">
+                <p className="text-gray-700 font-semibold mb-2">
+                  お客様の安全を最優先に考えています
+                </p>
+                <p className="text-sm text-gray-500">
+                  外部サービスへ安全に接続しています
+                </p>
+              </div>
+            </>
+          )}
 
         </div>
 
