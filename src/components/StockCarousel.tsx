@@ -1,6 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { StockPrice } from '../types/stock';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import type { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+
+const LazyAreaChart = lazy(() => import('recharts').then(module => ({ default: module.AreaChart })));
+const LazyArea = lazy(() => import('recharts').then(module => ({ default: module.Area })));
+const LazyXAxis = lazy(() => import('recharts').then(module => ({ default: module.XAxis })));
+const LazyYAxis = lazy(() => import('recharts').then(module => ({ default: module.YAxis })));
+const LazyCartesianGrid = lazy(() => import('recharts').then(module => ({ default: module.CartesianGrid })));
+const LazyTooltip = lazy(() => import('recharts').then(module => ({ default: module.Tooltip })));
+const LazyResponsiveContainer = lazy(() => import('recharts').then(module => ({ default: module.ResponsiveContainer })));
 
 interface StockCarouselProps {
   prices: StockPrice[];
@@ -279,35 +287,44 @@ export default function StockCarousel({ prices, stockName }: StockCarouselProps)
         ) : (
           <div className="bg-white rounded-xl shadow-card p-4">
             <h3 className="text-sm font-semibold text-gray-700 mb-4">株価推移チャート</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={chartData}>
-                <defs>
-                  <linearGradient id="colorClose" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis
-                  dataKey="date"
-                  tick={{ fontSize: 11, fill: '#6b7280' }}
-                  tickLine={{ stroke: '#e5e7eb' }}
-                />
-                <YAxis
-                  tick={{ fontSize: 11, fill: '#6b7280' }}
-                  tickLine={{ stroke: '#e5e7eb' }}
-                  tickFormatter={(value) => value.toLocaleString()}
-                />
-                <Tooltip content={<CustomTooltip />} />
-                <Area
-                  type="monotone"
-                  dataKey="close"
-                  stroke="#22c55e"
-                  strokeWidth={2}
-                  fill="url(#colorClose)"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+            <Suspense fallback={
+              <div className="flex items-center justify-center" style={{ height: 300 }}>
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-growth-green mx-auto mb-2"></div>
+                  <p className="text-sm text-gray-600">チャート読み込み中...</p>
+                </div>
+              </div>
+            }>
+              <LazyResponsiveContainer width="100%" height={300}>
+                <LazyAreaChart data={chartData}>
+                  <defs>
+                    <linearGradient id="colorClose" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <LazyCartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <LazyXAxis
+                    dataKey="date"
+                    tick={{ fontSize: 11, fill: '#6b7280' }}
+                    tickLine={{ stroke: '#e5e7eb' }}
+                  />
+                  <LazyYAxis
+                    tick={{ fontSize: 11, fill: '#6b7280' }}
+                    tickLine={{ stroke: '#e5e7eb' }}
+                    tickFormatter={(value) => value.toLocaleString()}
+                  />
+                  <LazyTooltip content={<CustomTooltip />} />
+                  <LazyArea
+                    type="monotone"
+                    dataKey="close"
+                    stroke="#22c55e"
+                    strokeWidth={2}
+                    fill="url(#colorClose)"
+                  />
+                </LazyAreaChart>
+              </LazyResponsiveContainer>
+            </Suspense>
           </div>
         )}
 

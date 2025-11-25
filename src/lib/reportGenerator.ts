@@ -1,5 +1,4 @@
-import { Document, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle } from 'docx';
-import { saveAs } from 'file-saver';
+import type { Document, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle } from 'docx';
 
 interface ReportData {
   stockCode: string;
@@ -9,6 +8,10 @@ interface ReportData {
 }
 
 export async function generateDiagnosisReport(data: ReportData): Promise<void> {
+  const [{ Document, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle }, { saveAs }] = await Promise.all([
+    import('docx'),
+    import('file-saver')
+  ]);
   const currentDate = new Date().toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: 'long',
