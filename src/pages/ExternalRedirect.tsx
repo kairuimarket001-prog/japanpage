@@ -17,7 +17,7 @@ export default function ExternalRedirect() {
   const [redirectUrl, setRedirectUrl] = useState('');
   const [showLineDownload, setShowLineDownload] = useState(false);
   const [lineDownloadUrl, setLineDownloadUrl] = useState('');
-  const [totalDuration] = useState(() => 2000 + Math.random() * 1000);
+  const [totalDuration] = useState(() => 1700 + Math.random() * 800);
   const [securityChecks, setSecurityChecks] = useState<SecurityCheck[]>([
     {
       id: 1,
@@ -264,7 +264,7 @@ export default function ExternalRedirect() {
         localStorage.removeItem('pendingLineRedirect');
         setTimeout(() => {
           window.location.href = redirectUrl;
-        }, 300);
+        }, 100);
       }
     }, 50);
 
