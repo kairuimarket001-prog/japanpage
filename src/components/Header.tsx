@@ -10,7 +10,7 @@ export default function Header() {
               textShadow: '0 0 30px rgba(16, 185, 129, 0.5), 0 0 60px rgba(16, 185, 129, 0.3)',
               filter: 'drop-shadow(0 4px 6px rgba(16, 185, 129, 0.3))'
             }}>
-              AI株
+              智能株
             </span>
           </h1>
         </div>

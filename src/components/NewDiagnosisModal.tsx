@@ -133,7 +133,7 @@ export default function NewDiagnosisModal({
           <div className="relative sticky top-0 px-3 py-3 sm:px-5 sm:py-4 flex items-center justify-between border-b-2 bg-white z-10 shadow-md" style={{ borderColor: '#e5e7eb' }}>
           <div className="flex-1 text-center pr-8">
             <h2 className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
-              {stockName}（{stockCode}）AI市場分析レポート（参考資料）
+              {stockName}（{stockCode}）智能市場分析レポート（参考資料）
             </h2>
           </div>
           <button

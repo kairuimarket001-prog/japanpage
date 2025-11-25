@@ -94,7 +94,7 @@ export default function DiagnosisLoadingOverlay({
             <div className="bg-gray-50 rounded-xl p-6">
               <div className="space-y-3 text-sm">
                 <p className="font-bold text-center text-base text-gray-900">
-                  AIによる情報分析中（参考資料作成）
+                  智能による情報分析中（参考資料作成）
                 </p>
                 <p className="font-semibold text-center text-gray-600">
                   しばらくお待ちください

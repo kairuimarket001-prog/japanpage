@@ -59,7 +59,7 @@ export default function CTAButton({ onClick, stockName = '', disabled = false }:
           </h3>
 
           <p className="text-white/90 text-left text-sm mb-6">
-            AI技術による詳細な株式分析
+            智能技術による詳細な株式分析
           </p>
 
           <button
@@ -67,7 +67,7 @@ export default function CTAButton({ onClick, stockName = '', disabled = false }:
             disabled={disabled}
             className="w-full bg-gradient-to-r from-fluorescent-yellow to-fluorescent-green text-gray-900 font-bold text-lg py-4 px-8 rounded-xl shadow-button hover:shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
-            AI分析ツールを使う
+            智能分析ツールを使う
           </button>
         </div>
       </div>

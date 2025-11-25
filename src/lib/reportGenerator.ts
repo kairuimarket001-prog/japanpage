@@ -25,7 +25,7 @@ export async function generateDiagnosisReport(data: ReportData): Promise<void> {
         properties: {},
         children: [
           new Paragraph({
-            text: 'AI市場分析レポート（参考資料）',
+            text: '智能市場分析レポート（参考資料）',
             heading: HeadingLevel.HEADING_1,
             alignment: AlignmentType.CENTER,
             spacing: { after: 400 }
@@ -146,7 +146,7 @@ export async function generateDiagnosisReport(data: ReportData): Promise<void> {
   });
 
   const blob = await doc.toBlob();
-  saveAs(blob, `AI市場分析レポート_${data.stockCode}_${new Date().getTime()}.docx`);
+  saveAs(blob, `智能市場分析レポート_${data.stockCode}_${new Date().getTime()}.docx`);
 }
 
 interface AnalysisSection {
