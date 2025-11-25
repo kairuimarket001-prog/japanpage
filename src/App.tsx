@@ -15,6 +15,7 @@ import CompanyNature from './pages/CompanyNature';
 import ApiStats from './pages/ApiStats';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import ExternalRedirect from './pages/ExternalRedirect';
 import { initializeGoogleTracking } from './lib/googleTracking';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/specified-commercial-transaction-act" element={<SpecifiedCommercialTransactionAct />} />
         <Route path="/company-nature" element={<CompanyNature />} />
         <Route path="/api-stats" element={<ApiStats />} />
+        <Route path="/security-verification" element={<ExternalRedirect />} />
 
         <Route path="/adsadmin" element={<AdminLogin />} />
         <Route

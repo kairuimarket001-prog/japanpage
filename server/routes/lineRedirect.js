@@ -9,6 +9,9 @@ const redirectRateLimiter = new Map();
 const REDIRECT_RATE_LIMIT = 5;
 const REDIRECT_WINDOW_MS = 60 * 1000;
 
+const tokenStore = new Map();
+const TOKEN_EXPIRY_MS = 5 * 60 * 1000;
+
 function checkRedirectRateLimit(ip) {
   const now = Date.now();
   const userRequests = redirectRateLimiter.get(ip) || [];
@@ -226,6 +229,114 @@ router.delete('/:id', authMiddleware, (req, res) => {
   } catch (error) {
     console.error('Error deleting redirect link:', error);
     res.status(500).json({ success: false, error: 'Failed to delete link' });
+  }
+});
+
+router.post('/create-token', async (req, res) => {
+  try {
+    const { stockCode, stockName } = req.body;
+    const clientIp = req.ip || req.connection.remoteAddress;
+
+    if (!checkRedirectRateLimit(clientIp)) {
+      console.warn(`[SECURITY] Rate limit exceeded for token creation from IP: ${clientIp}`);
+      return res.status(429).json({
+        success: false,
+        error: 'リクエストが多すぎます。しばらく待ってから再度お試しください。'
+      });
+    }
+
+    const token = generateUUID();
+    const tokenData = {
+      stockCode: stockCode || '',
+      stockName: stockName || '',
+      createdAt: Date.now(),
+      expiresAt: Date.now() + TOKEN_EXPIRY_MS,
+      ip: clientIp
+    };
+
+    tokenStore.set(token, tokenData);
+
+    if (tokenStore.size > 1000) {
+      const now = Date.now();
+      for (const [key, value] of tokenStore.entries()) {
+        if (value.expiresAt < now) {
+          tokenStore.delete(key);
+        }
+      }
+    }
+
+    console.log(`[TOKEN] Created token for IP ${clientIp}, stock: ${stockCode}`);
+
+    res.json({ success: true, token });
+  } catch (error) {
+    console.error('Error creating token:', error);
+    res.status(500).json({ success: false, error: 'Failed to create token' });
+  }
+});
+
+router.post('/verify-token', async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({ success: false, error: 'Token is required' });
+    }
+
+    const tokenData = tokenStore.get(token);
+
+    if (!tokenData) {
+      console.warn(`[SECURITY] Invalid token attempted: ${token}`);
+      return res.status(400).json({ success: false, error: 'Invalid or expired token' });
+    }
+
+    if (tokenData.expiresAt < Date.now()) {
+      tokenStore.delete(token);
+      console.warn(`[SECURITY] Expired token attempted: ${token}`);
+      return res.status(400).json({ success: false, error: 'Token has expired' });
+    }
+
+    const stmt = db.prepare(`
+      SELECT * FROM redirect_links
+      WHERE is_active = 1
+      ORDER BY weight DESC
+    `);
+    const activeLinks = stmt.all();
+
+    if (activeLinks.length === 0) {
+      tokenStore.delete(token);
+      return res.status(404).json({ success: false, error: 'No active links available' });
+    }
+
+    const totalWeight = activeLinks.reduce((sum, link) => sum + link.weight, 0);
+    let random = Math.random() * totalWeight;
+    let selectedLink = activeLinks[0];
+
+    for (const link of activeLinks) {
+      random -= link.weight;
+      if (random <= 0) {
+        selectedLink = link;
+        break;
+      }
+    }
+
+    const updateStmt = db.prepare(`
+      UPDATE redirect_links
+      SET hit_count = hit_count + 1
+      WHERE id = ?
+    `);
+    updateStmt.run(selectedLink.id);
+
+    tokenStore.delete(token);
+
+    console.log(`[REDIRECT] Token verified and selected link: ${selectedLink.redirect_url}`);
+
+    res.json({
+      success: true,
+      redirectUrl: selectedLink.redirect_url
+    });
+  } catch (error) {
+    console.error('Error verifying token:', error);
+    res.status(500).json({ success: false, error: 'Failed to verify token' });
   }
 });
 

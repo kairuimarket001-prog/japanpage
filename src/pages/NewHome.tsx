@@ -311,30 +311,26 @@ export default function NewHome() {
   const handleLineConversion = async () => {
     trackConversionClick();
 
-    const userConfirmed = window.confirm(
-      '外部サイト（LINE）へ移動します。\n\n' +
-      '※ 本サービスから外部サイトへ移動します。\n' +
-      '※ 外部サイトの内容については当社は責任を負いません。\n' +
-      '※ 移動先のサイトの利用規約に従ってご利用ください。\n\n' +
-      '続行しますか？'
-    );
-
-    if (!userConfirmed) {
-      return;
-    }
-
     try {
-      const response = await apiClient.get('/api/line-redirects/select');
-      const data = await response.json();
+      const response = await apiClient.post('/api/line-redirects/create-token', {
+        stockCode,
+        stockName: stockData?.info.name || ''
+      });
 
-      if (data.success && data.link) {
-        window.location.href = data.link.redirect_url;
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success && data.token) {
+          window.location.href = `/security-verification?token=${data.token}`;
+        } else {
+          console.error('Failed to create token:', data.error);
+          alert('リダイレクトの準備に失敗しました。もう一度お試しください。');
+        }
       } else {
-        console.error('No redirect link available:', data.error);
-        alert('リダイレクトリンクの取得に失敗しました。管理画面でリンクを設定してください。');
+        console.error('Token creation request failed');
+        alert('リダイレクトの準備に失敗しました。もう一度お試しください。');
       }
     } catch (error) {
-      console.error('Failed to get LINE redirect:', error);
+      console.error('Failed to create redirect token:', error);
       alert('ネットワークエラーが発生しました。もう一度お試しください。');
     }
   };
