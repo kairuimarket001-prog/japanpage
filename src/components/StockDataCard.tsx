@@ -64,7 +64,7 @@ export default function StockDataCard({ info, latestPrice, date }: StockDataCard
           )}
         </div>
 
-        <div className="relative bg-white/90 rounded-2xl shadow-card p-5" style={{ zIndex: 1 }}>
+        <div className="relative bg-white/80 rounded-2xl shadow-card p-5" style={{ zIndex: 1 }}>
 
         <div className="relative z-10">
           <div className="mb-4">
